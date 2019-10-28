@@ -17,29 +17,37 @@ Hockey (NHL) competitions also include:
 
 
 
-# http://api.espn.com/v1/sports/hockey/nhl ?
 
-
-
-r = requests.get('https://site.web.api.espn.com/apis/v2/scoreboard/header?sport=hockey&league=nhl&region=us&lang=en&contentorigin=espn&buyWindow=1m&showAirings=buy%2Clive%2Creplay&showZipLookup=true&tz=America/New_York')
+r = requests.get('https://site.web.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard?region=us&lang=en&contentorigin=espn&limit=100&calendartype=blacklist&includeModules=videos%2Ccards&dates=20191027&buyWindow=1m&showAirings=buy%2Clive&showZipLookup=true')
 
 r= json.dumps(r.json(), sort_keys=True, indent=4)
 r = json.loads(r)
-r = r["sports"][0]["leagues"][0]["events"][1]["competitors"]
-
-home_team_info = r[0]
-home_team_name = home_team_info["displayName"]
-home_team_goalie = (home_team_info["goalieSummary"][0]["athlete"]["displayName"],home_team_info["goalieSummary"][0]["displayValue"])
-home_team_score = home_team_info["score"]
-
-away_team_info = r[1]
-away_team_name = away_team_info["displayName"]
-away_team_goalie = (away_team_info["goalieSummary"][0]["athlete"]["displayName"],away_team_info["goalieSummary"][0]["displayValue"])
-away_team_score = away_team_info["score"]
+games = r["events"]
+i = 0
 
 
-print(("{} @ {}".center(70, ' ')).format(away_team_name, home_team_name))
-print(("{} - {}".center(97, ' ')).format(away_team_score,home_team_score))
-print(("{} - {}".center(0, ' ')).format(away_team_goalie,home_team_goalie))
+while(i < len(games)):
+	game = r["events"][i]
+	rr = game["competitions"][0]
+	home_team_info = game["competitions"][0]["competitors"][0]
+	home_team_name = home_team_info["team"]["displayName"]
+	home_team_score = home_team_info["score"]
+	
+	away_team_info = game["competitions"][0]["competitors"][1]
+	away_team_name = away_team_info["team"]["displayName"]
+	away_team_score = away_team_info["score"]
+	if(home_team_info["winner"] == True and (rr["status"]["featuredAthletes"][0]["athlete"]["team"]["id"] == home_team_info["team"]["id"])):
+		home_team_goalie = (rr["status"]["featuredAthletes"][0]["athlete"]["displayName"],rr["status"]["featuredAthletes"][0]["statistics"][6]["displayValue"])
+		away_team_goalie = (rr["status"]["featuredAthletes"][1]["athlete"]["displayName"],rr["status"]["featuredAthletes"][1]["statistics"][6]["displayValue"])
+	else:
+		home_team_goalie = (rr["status"]["featuredAthletes"][1]["athlete"]["displayName"],rr["status"]["featuredAthletes"][1]["statistics"][6]["displayValue"])
+		away_team_goalie = (rr["status"]["featuredAthletes"][0]["athlete"]["displayName"],rr["status"]["featuredAthletes"][0]["statistics"][6]["displayValue"])
 
-#print(json.dumps(r,indent=4))
+
+	print("\n")
+	print(("{} @ {}".center(70, ' ')).format(away_team_name, home_team_name))
+	print(("{} - {}".center(99, ' ')).format(away_team_score,home_team_score))
+	print(("{} - {}".center(45, ' ')).format(away_team_goalie,home_team_goalie))
+	print("\n")
+
+	i = i + 1
