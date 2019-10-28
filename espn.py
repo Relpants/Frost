@@ -25,6 +25,21 @@ r = requests.get('https://site.web.api.espn.com/apis/v2/scoreboard/header?sport=
 
 r= json.dumps(r.json(), sort_keys=True, indent=4)
 r = json.loads(r)
-r = r["sports"][0]["leagues"][0]["events"]
+r = r["sports"][0]["leagues"][0]["events"][1]["competitors"]
 
-print(json.dumps(r,indent=4))
+home_team_info = r[0]
+home_team_name = home_team_info["displayName"]
+home_team_goalie = (home_team_info["goalieSummary"][0]["athlete"]["displayName"],home_team_info["goalieSummary"][0]["displayValue"])
+home_team_score = home_team_info["score"]
+
+away_team_info = r[1]
+away_team_name = away_team_info["displayName"]
+away_team_goalie = (away_team_info["goalieSummary"][0]["athlete"]["displayName"],away_team_info["goalieSummary"][0]["displayValue"])
+away_team_score = away_team_info["score"]
+
+
+print(("{} @ {}".center(70, ' ')).format(away_team_name, home_team_name))
+print(("{} - {}".center(97, ' ')).format(away_team_score,home_team_score))
+print(("{} - {}".center(0, ' ')).format(away_team_goalie,home_team_goalie))
+
+#print(json.dumps(r,indent=4))
