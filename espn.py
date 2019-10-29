@@ -39,42 +39,42 @@ def make_request(date):
 	resp = json.dumps(resp.json(), sort_keys=True, indent=4)
 	r = json.loads(resp)
 	return r
-	
-date = "20191026"
-r = make_request(date)
-num_of_games = r["events"]
-i = 0
+
+def start(date):
+
+	r = make_request(date)
+	num_of_games = r["events"]
+	i = 0
+
+	home_team_list = []
+	away_team_list = []
+
+	while(i < len(num_of_games)):
+
+		home_team = Team()
+		away_team = Team()
+		game = r["events"][i]
+		game_stats = game["competitions"][0]
+
+		home_team_info = game["competitions"][0]["competitors"][0]
+		home_team.setName(home_team_info["team"]["displayName"])
+		home_team.setScore(home_team_info["score"])
+
+		away_team_info = game["competitions"][0]["competitors"][1]
+		away_team.setName(away_team_info["team"]["displayName"]) 
+		away_team.setScore(away_team_info["score"]) 
+
+		#I
+		if(home_team_info["winner"] == True and (game_stats["status"]["featuredAthletes"][0]["athlete"]["team"]["id"] == home_team_info["team"]["id"])):
+			home_team.setStartingGoalie(game_stats["status"]["featuredAthletes"][0]["athlete"]["displayName"],game_stats["status"]["featuredAthletes"][0]["statistics"][6]["displayValue"])
+			away_team.setStartingGoalie(game_stats["status"]["featuredAthletes"][1]["athlete"]["displayName"],game_stats["status"]["featuredAthletes"][1]["statistics"][6]["displayValue"])
+		else:
+			home_team.setStartingGoalie(game_stats["status"]["featuredAthletes"][1]["athlete"]["displayName"],game_stats["status"]["featuredAthletes"][1]["statistics"][6]["displayValue"])
+			away_team.setStartingGoalie(game_stats["status"]["featuredAthletes"][0]["athlete"]["displayName"],game_stats["status"]["featuredAthletes"][0]["statistics"][6]["displayValue"])
+		
+		home_team_list.append(home_team)
+		away_team_list.append(away_team)
+		i = i + 1
 
 
-home_team = Team()
-away_team = Team()
-
-while(i < len(num_of_games)):
-	
-	game = r["events"][i]
-	game_stats = game["competitions"][0]
-
-	home_team_info = game["competitions"][0]["competitors"][0]
-	home_team.setName(home_team_info["team"]["displayName"])
-	home_team.setScore(home_team_info["score"])
-	
-	away_team_info = game["competitions"][0]["competitors"][1]
-	away_team.setName(away_team_info["team"]["displayName"]) 
-	away_team.setScore(away_team_info["score"]) 
-
-	#I
-	if(home_team_info["winner"] == True and (game_stats["status"]["featuredAthletes"][0]["athlete"]["team"]["id"] == home_team_info["team"]["id"])):
-		home_team.setStartingGoalie(game_stats["status"]["featuredAthletes"][0]["athlete"]["displayName"],game_stats["status"]["featuredAthletes"][0]["statistics"][6]["displayValue"])
-		away_team.setStartingGoalie(game_stats["status"]["featuredAthletes"][1]["athlete"]["displayName"],game_stats["status"]["featuredAthletes"][1]["statistics"][6]["displayValue"])
-	else:
-		home_team.setStartingGoalie(game_stats["status"]["featuredAthletes"][1]["athlete"]["displayName"],game_stats["status"]["featuredAthletes"][1]["statistics"][6]["displayValue"])
-		away_team.setStartingGoalie(game_stats["status"]["featuredAthletes"][0]["athlete"]["displayName"],game_stats["status"]["featuredAthletes"][0]["statistics"][6]["displayValue"])
-
-
-	print("\n")
-	print(("{} @ {}".center(70, ' ')).format(away_team.getName(), home_team.getName()))
-	print(("{} - {}".center(99, ' ')).format(away_team.getScore(), home_team.getScore()))
-	print(("{} - {}".center(45, ' ')).format(away_team.getStartingGoalie(), home_team.getStartingGoalie()))
-	print("\n")
-
-	i = i + 1
+	return home_team_list,away_team_list
