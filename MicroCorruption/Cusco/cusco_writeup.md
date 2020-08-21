@@ -13,12 +13,6 @@ This challenge involved performing a buffer overflow, to make a return to a cust
 
 
 
-
-
-
-
-
-
 ## Dissasembly
     453a:  3150 1000      add	#0x10, sp
     453e:  3041           ret
