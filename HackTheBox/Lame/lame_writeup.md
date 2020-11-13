@@ -1,7 +1,5 @@
 # Lame Writeup
-
-# Insert lame picture here
-
+![lame](lame.jpg)
 
 
 ## Nmap scan
@@ -10,6 +8,7 @@
 -FTP
 -SSH
 -Samba
+![nmap](lame_nmap.png)
 
 
 ###
