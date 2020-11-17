@@ -23,6 +23,7 @@
 ![venom](msfvenom.png)
 
 - Uploading the trojan was successfully and at this point I figured I had to start the listener on my attacking box and just get the script to kick off. Luckly it looks like from the manager interface you can start and stop services. Starting my trojan up ended up popping me a reverse shell.
+
 ![shell](shell.png)
 
 - Got in and poked around ended up going to Users which contained nothing other than Admin, I thought I was going to have to priv esc but it turned out I didnt have to and the both flags were contained in the same file owning the box
