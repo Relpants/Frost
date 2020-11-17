@@ -1,5 +1,5 @@
 # Jerry Writeup
-![jerry](jerry_icon.jpg)
+![jerry](jerry_icon.png)
 
 # Enumeration
 
