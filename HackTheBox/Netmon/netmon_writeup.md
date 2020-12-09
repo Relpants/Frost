@@ -22,8 +22,9 @@ files were stored.
 
 
 ## OSINT Gathering
-![netmonfiles1](files/netmon_service_file_location1.png)
+![netmonfiles1](files/netmon_service_file_location.png)
 ![netmonfiles2](files/netmon_service_file_location2.png)
+
 Based on these findings the PRTGConfiguration.dat and the .bak appear to contain user information 
 which seems like a good start to look for credentials of some kind.
 
@@ -59,6 +60,7 @@ end up guessing the password with 2019 instead and this ends up working.
 
 # Admin Page
 ![admin](files/admin.png)
+
 So based on the amount of information on the page, I dont spend a ton of time looking around.
 Instead going back to the CVE information I previously found.
 
