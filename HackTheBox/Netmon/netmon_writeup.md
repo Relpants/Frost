@@ -22,8 +22,8 @@ files were stored.
 
 
 ## OSINT Gathering
-![netmonfiles](files/netmon_services_file_location1.png)
-![netmonfiles](files/netmon_services_file_location2.png)
+![netmonfiles1](files/netmon_service_file_location1.png)
+![netmonfiles2](files/netmon_service_file_location2.png)
 Based on these findings the PRTGConfiguration.dat and the .bak appear to contain user information 
 which seems like a good start to look for credentials of some kind.
 
