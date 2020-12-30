@@ -17,10 +17,13 @@ Hockey (NHL) competitions also include:
 class Team:
 	def __init__(self):
 		self.__name = ""	# __ double underscore indicates private member
+		self.__logo = ""
 		self.__score = 0
 		self.__goalie = ("","")
 	def setName(self, name):
 		self.__name = name
+	def setLogo(self, logo):
+		self.__logo = logo
 	def setScore(self, score):
 		self.__score = score
 	def setStartingGoalie(self, goalieName, savepct):
@@ -28,6 +31,8 @@ class Team:
 
 	def getName(self):
 		return self.__name
+	def getLogo(self):
+		return self.__logo
 	def getScore(self):
 		return self.__score
 	def getStartingGoalie(self):
@@ -58,10 +63,12 @@ def start(date):
 
 		home_team_info = game["competitions"][0]["competitors"][0]
 		home_team.setName(home_team_info["team"]["displayName"])
+		home_team.setLogo(home_team_info["team"]["logo"])
 		home_team.setScore(home_team_info["score"])
 
 		away_team_info = game["competitions"][0]["competitors"][1]
-		away_team.setName(away_team_info["team"]["displayName"]) 
+		away_team.setName(away_team_info["team"]["displayName"])
+		away_team.setLogo(away_team_info["team"]["logo"]) 
 		away_team.setScore(away_team_info["score"]) 
 
 		#I
