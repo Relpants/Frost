@@ -29,20 +29,20 @@ async def on_message(message):
 	if message.author == client.user:
 		return
 
-	chant = [
-		'Go preds.',
-		'Rinne putting on a clinc'
-	]
-
-	if message.content == 'preds':
-		response = random.choice(chant)
-		home_team,away_team = espn.start("20191027")
+	if "!scores" in message.content:
+		message_split = message.content.split(" ")
+		home_team,away_team = espn.start(message_split[1])
 		i = 0
 		while(i < len(home_team)):
-			await message.channel.send("--------------------------------------")
-			await message.channel.send(("{} @ {}".center(70, ' ')).format(away_team[i].getName(), home_team[i].getName()))
-			await message.channel.send(("{} - {}".center(99, ' ')).format(away_team[i].getScore(), home_team[i].getScore()))
-			await message.channel.send(("{} - {}\n".center(45, ' ')).format(away_team[i].getStartingGoalie(), home_team[i].getStartingGoalie()))
-			await message.channel.send("--------------------------------------")
+			await message.channel.send(away_team[i].getLogo())
+			await message.channel.send("```\n    {}\n          {}\n{}\n\n          @ \n\n    {}\n          {}\n{}\n```".center(70, ' ').format(
+				away_team[i].getName(), 
+				away_team[i].getScore(), 
+				away_team[i].getStartingGoalie(), 
+				home_team[i].getName(), 
+				home_team[i].getScore(), 
+				home_team[i].getStartingGoalie()))
+			await message.channel.send(home_team[i].getLogo())
+			await message.channel.send("```--------------------------------------\n----------------------------------------------------------------------------\n----------------------------------------------------------------------------\n----------------------------------------------------------------------------\n----------------------------------------------------------------------------\n```")
 			i = i + 1
 client.run(TOKEN)
