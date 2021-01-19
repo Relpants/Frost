@@ -1,13 +1,13 @@
 # Nibbles Writeup 
-![nibblez](/files/nibbles.png)
+![nibblez](files/nibbles.png)
 
 # Enumeration
 
 ## Nmap Scan
-![nmap](/files/nmap.png)
+![nmap](files/nmap.png)
 
 ## Dirb Scan
-![dirb](/files/dirb.png)
+![dirb](files/dirb.png)
 
 ## Hidden Page
 - Poked around the box, didnt seem to notice anything. Well something was there it was right under my nose on the main page.
@@ -15,7 +15,7 @@ We get the main page "Hello World" but inspecting the page *inspect element* fur
 Sure enough going to this directory *nibbleblog* gets us further. This makes sense because the dirb scan used a common 
 wordlist and nibbleblog was assurdly not on the list.
 
-![main](/files/main.png)
+![main](files/main.png)
 
 ##  Main page
 
@@ -26,7 +26,7 @@ obtaining admin credentials, then activating a my image plugin to upload a shell
 some kind on this page. Inspecting the element once again shows there is a reference to an image at a different
 directory. Sure enough there are more details to explore here under /nibbleblog/content/.
 
-![hidden](/files/hidden.png)
+![hidden](files/hidden.png)
 
 - A quick note here as I am browsing this file structure I feel like im starting to understand the layout
 of apache in general. Namely /public sub directory is ofcourse being "offered" on the public facing webpage.
@@ -45,27 +45,27 @@ this seemed to be just a password you randomly have to guess.
 
 
 - Correct login gives us the resulting page.
-![login](/files/admin_login.png)
+![login](files/admin_login.png)
 
 - At this stage I remember the previous article mentioning the use of plugins and then visiting the plugin.
-![writeup](/files/writeup.png)
+![writeup](files/writeup.png)
 - I could have used metasploit for this part, but was having some issues so decided to just edit /usr/share/webshells/php/php-reverse-shell
 to accomplish what I wanted. I opened up a listener on my localhost and followed the directions of navigating down
 to the specific image *or php reverse shell in this case* to get it to load. Execution of this gives us a foothold on the box
 as the user nibbler.
-![foothold](/files/foothold.png)
+![foothold](files/foothold.png)
 
 - Navigating down I obtain the user flag
-![user](/files/user_flag.png)
+![user](files/user_flag.png)
 
 
 ## Root
-![admin](/files/admin_login.png)
+![admin](files/admin_login.png)
 - One thing I immediately notice is the zip file in the home directory of nibbles. Unziping those files leaves us with
 a monitor script. However doing a sudo -l we see once again we have access to run that file as root.
-![sudo](/files/sudoers.png)
+![sudo](files/sudoers.png)
 - In this case we also have write access on that file. This ofcourse gives us numerous ways to obtain a root shell. I ended up just overwriting
 the file with bash -i and running the file as sudo to give me a root shell and ultimately the flag.
-![root](/files/root.png)
-![rootflag](/files/root_flag.png)
+![root](files/root.png)
+![rootflag](files/root_flag.png)
 
