@@ -1,5 +1,5 @@
 # Armageddon Writeup
-![pic](files/armageddon.ppg)
+![pic](files/armageddon.png)
 
 ## Enumeration
 ![front](files/arma.png)
