@@ -48,7 +48,9 @@ me as something that would be a plausible route for priv. esc.
 - I stopped here and figured this would be a worthwhile rabbit whole to try. This also ended being the trick to get a root shell.
 I created a ruby script in the tmp directory that performed an exec on bash and just called that script through knife, and in this
 case running knife as root caused this shell to be spawned as root.
+<p align = "center">
 ![root](files/root.png)
-<p align = "center>
-![rootFlag](files/root_flag.png)
+</p>
+<p align = "center">
+<img src="files/root_flag.png">
 </p>
