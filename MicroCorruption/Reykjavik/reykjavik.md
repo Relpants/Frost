@@ -21,32 +21,44 @@ The first part of this function essentially counts up from 0-ff ( 100 ) and load
 Section of code that performs this.
 
 <p align="center">
-	<src="files/first.png">
+	<img src="files/first.png">
 </p>
 
 And memory after this loop is finished
 
-[first_memory](files/first_memory.png)
+<p align="center">
+	<img src="files/first_memory.png">
+</p>
 
 The next part of the function took me a little bit to understand what was going on and to be honest Im not exactly sure what it is doing other than
 taking the memory location from the first step and doing some operations on the string shown below.
 
-[second](files/second.png)
+<p align = "center">
+	<img src="files/second.png">
+</p>
 
-[second_string](files/second_string.png)
+<p align = "center">
+	<img src="files/second_string.png">
+</p>
 
 What did lead me to think this was just some operations being decrypted from memory is the at the beginning of `0x2470` there is a instruction `b012` 
 which happens to be the call instruction in msp430. This seems plausible by the fact that the other function call in main is calling out to a memory location.
 
-[second_memory](files/second_memory.png)
+<p align = "center">
+	<img src="files/second_memory.png">
+</p>
 
 The last part of the encryption function appears to also be doing some xor operations with this same memory region. Specifically from main `0xf8` is loaded into r14 and this loop decrements r14 each iteration.
 
-[third](files/third.png)
+<p align = "center">
+	<img src="files/third.png">
+</p>
 
 The output of this section of the code results in the memory region being the following.
 
-[third_memory](files/third_memory.png)
+<p align="center">
+	<img src="files/third_memory.png">
+</p>
 
 Again, I notice a couple of what appears to be calls based on the Hex values `b012`.
 
@@ -58,8 +70,13 @@ Again, I notice a couple of what appears to be calls based on the Hex values `b0
 Finally we get to the call to 0x2400. Like a previous challenge I solved on this site I stepped through this function a couple times to see 
 where I thought it ended at and took that section of memory and threw it in ODA dissassembler. The output of that was the following
 
-[hidden_function](hidden_function1.png)
-[hidden_function](hidden_function2.png)
+<p align="center">
+	<img src = "hidden_function1.png">
+</p>
+
+<p align="center">
+	<img src ="hidden_function2.png">
+</p>
 
 Essentially in closing there is a loop in this area of the code that prints out the string `what's the password?`. Once this is complete
 it prompts the user for the password. but the most key component is at `0000048` where we ....
