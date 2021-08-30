@@ -71,11 +71,11 @@ Finally we get to the call to 0x2400. Like a previous challenge I solved on this
 where I thought it ended at and took that section of memory and threw it in ODA dissassembler. The output of that was the following
 
 <p align="center">
-	<img src = "hidden_function1.png">
+	<img src = "files/hidden_function1.png">
 </p>
 
 <p align="center">
-	<img src ="hidden_function2.png">
+	<img src ="files/hidden_function2.png">
 </p>
 
 Essentially in closing there is a loop in this area of the code that prints out the string `what's the password?`. Once this is complete
