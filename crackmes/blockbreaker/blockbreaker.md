@@ -47,6 +47,6 @@ Giving us the final answer of
 `homeisaperson`
 
 <p align="center">
-	<img src = "files/answer.jpg">
+	<img src = "files/answer.JPG">
 </p>
 
